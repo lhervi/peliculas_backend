@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreingId('pelicula_id')->constrained()->cascadeOnDelete();
             $table->foreignId('usuario_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->
+            $table->text('texto_resena');
+            $table->smallInteger('puntuacion')->nullable();
+            $table->timestamp('fecha_creacion')->useCurrent();
+            $table->timestamp('fecha_actualizacion')->nullable()->useCurrentOnUpdate();
             $table->timestamps();
         });
     }

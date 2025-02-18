@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('visionados', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pelicula_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('usuario_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->timestamp('fecha_visionado')->nullable();
+            $table->string('formato_visionado')->nullable();
+            $table->string('lugar_visionado')->nullable();
             $table->timestamps();
         });
     }
