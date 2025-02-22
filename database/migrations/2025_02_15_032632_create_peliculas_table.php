@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -13,15 +14,19 @@ return new class extends Migration
     {
         Schema::create('peliculas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('director_id')->nullable();
+
             $table->string('titulo');
-            $table->string('titulo_alternativo');
-            $table->year('ano_estreno');
+            $table->string('titulo_alternativo')->nullable();
+            $table->year('ano_estreno')->nullable();
             $table->text('sinopsis')->nullable();
             $table->smallInteger('duracion')->nullable();
             $table->text('url_poster_tmdb')->nullable();
             $table->text('url_backdrop_tmdb')->nullable();
             $table->integer('tmdb_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('director_id')->references('id')->on('directores')->onDelete('cascade');
         });
     }
 
@@ -30,6 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        //Schema::dropForeign(['director_id']);
         Schema::dropIfExists('peliculas');
     }
 };

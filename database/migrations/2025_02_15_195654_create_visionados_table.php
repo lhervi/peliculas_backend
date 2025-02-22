@@ -27,6 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        //Schema::dropForeign(['pelicula_id', 'usuario_id']);
         Schema::dropIfExists('visionados');
     }
 };

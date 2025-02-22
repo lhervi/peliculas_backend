@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('resenas', function (Blueprint $table) {
             $table->id();
-            $table->foreingId('pelicula_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('pelicula_id')->constrained()->cascadeOnDelete();
             $table->foreignId('usuario_id')->nullable()->constrained()->cascadeOnDelete();
             $table->text('texto_resena');
             $table->smallInteger('puntuacion')->nullable();
@@ -28,6 +28,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        //Schema::dropForeign(['pelicula_id', 'usuario_id']);
         Schema::dropIfExists('resenas');
     }
 };
