@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pelicula extends Model
 {
@@ -18,7 +21,7 @@ class Pelicula extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function director() {
+    public function director():BelongsTo {
         return $this->belongsTo(Director::class);
     }
 
@@ -29,8 +32,8 @@ class Pelicula extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
 
-    public function generos (){
-        return $this->belongsToMany(Genero::class, 'genero_pelicula');
+    public function generos ():BelongsToMany{
+        return $this->belongsToMany(Genero::class, 'genero_pelicula', 'pelicula_id', 'genero_id');
     }
 
     /**
@@ -39,7 +42,7 @@ class Pelicula extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function visionados(){
+    public function visionados():HasMany{
         return $this->hasMany(Visionado::class);
     }
 
@@ -49,9 +52,11 @@ class Pelicula extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function resenas(){
+    public function resenas():HasMany{
         return $this->hasMany(Resena::class);
     }
+
+
 
 
 }
